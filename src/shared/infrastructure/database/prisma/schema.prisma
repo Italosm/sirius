@@ -13,8 +13,79 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRoles {
+  OWNER
+  ADMIN
+  USER
+  ASSISTANT
+  SELLER
+  SUPERVISOR
+  DIRECTOR
+  FINANCIAL
+  HR
+  SAC
+  GUEST
+}
+
+enum UserSectors {
+  MANAGER
+  DIRECTOR
+  ASSISTANT
+  IT
+  MARKETING
+  SALES
+  BILLING
+  FINANCE
+  HR
+  SAC
+  GUEST
+}
+
+model UserTokens {
+  id      String @id @db.Uuid
+  token   String @db.Uuid
+  User    User   @relation(fields: [user_id], references: [id])
+  user_id String @db.Uuid
+
+  @@map("users_tokens")
+}
+
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
+  id         String        @id @db.Uuid
+  name       String        @db.VarChar(255)
+  email      String        @unique @db.VarChar(255)
+  status     Boolean       @default(false)
+  password   String        @db.VarChar(100)
+  avatar     String?       @db.VarChar(255)
+  roles      UserRoles[]   @default([USER])
+  sectors    UserSectors[] @default([GUEST])
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  store      Store?        @relation(fields: [store_id], references: [id])
+  store_id   String?       @db.Uuid
+  UserTokens UserTokens[]
+
+  @@map("users")
+}
+
+model Store {
+  id           String   @id @db.Uuid
+  name         String   @db.VarChar(255)
+  slogan       String?  @db.VarChar(255)
+  document     String   @unique @db.VarChar(14)
+  email        String   @db.VarChar(255)
+  instagram    String?  @db.VarChar(255)
+  address      String   @db.VarChar(255)
+  cep          String   @db.VarChar(255)
+  complement   String?  @db.VarChar(255)
+  neighborhood String   @db.VarChar(255)
+  number       String?  @db.VarChar(255)
+  city         String   @db.VarChar(255)
+  state        String   @db.VarChar(255)
+  logo         String?  @db.VarChar(255)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  users        User[]
+
+  @@map("stores")
 }
