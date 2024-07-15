@@ -52,6 +52,15 @@ enum EntityType {
   CUSTOMER
 }
 
+enum EntityMediaType {
+  USER
+  STORE
+  CUSTOMER
+  ORDER
+  SERVICE
+  SUB_SERVICE
+}
+
 enum PaymentType {
   PIX
   CASH
@@ -114,6 +123,7 @@ model Store {
   services           Service[]
   customers          Customer[]
   order              Order[]
+  media_type         MediaType[]
 
   @@index([name])
   @@index([created_at, updated_at])
@@ -151,6 +161,7 @@ model Service {
   sub_service     SubService[]
   order_service   OrderService[]
   OrderSubService OrderSubService[]
+  Media           Media[]
 
   @@index([store_id])
   @@index([is_published])
@@ -218,6 +229,7 @@ model Order {
   updated_at      DateTime       @updatedAt
   deleted_at      DateTime?      @db.Date
   order_service   OrderService[]
+  Media           Media[]
 
   @@index([store_id, customer_id])
   @@index([store_id])
@@ -272,4 +284,32 @@ model Contact {
 
   @@index([type_entity])
   @@map("contacts")
+}
+
+model Media {
+  id               String    @id @db.Uuid
+  url              String    @db.Text
+  alt_text         String?   @db.VarChar(255)
+  service          Service   @relation(fields: [service_id], references: [id])
+  service_id       String    @db.Uuid
+  order            Order?    @relation(fields: [order_id], references: [id])
+  order_id         String?   @db.Uuid
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
+  deleted_at       DateTime? @db.Date
+  lgpd_excluded_at DateTime? @db.Date
+
+  @@map("media")
+}
+
+model MediaType {
+  id         String    @id @db.Uuid
+  store_id   String    @db.Uuid
+  store      Store     @relation(fields: [store_id], references: [id])
+  name       String    @db.VarChar(255)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime? @db.Date
+
+  @@map("media_types")
 }
