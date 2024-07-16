@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch dotenv-cli -e .env.development src/shared/infrastructure/http/server.ts",
+    "dev": "npx dotenv-cli -e .env.development -- tsx watch src/shared/infrastructure/http/server.ts",
     "prisma:generate": "npx dotenv-cli -e .env.development -- prisma generate --schema=src/shared/infrastructure/database/prisma/schema.prisma",
     "prisma:migrate": "npx dotenv-cli -e .env.development -- prisma migrate dev --schema=src/shared/infrastructure/database/prisma/schema.prisma",
     "prisma:studio": "prisma studio --schema=src/shared/infrastructure/database/prisma/schema.prisma"
@@ -17,6 +17,7 @@
     "@types/node": "^20.14.10",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
