@@ -8,7 +8,10 @@ CREATE TYPE "UserSectors" AS ENUM ('MANAGER', 'DIRECTOR', 'ASSISTANT', 'IT', 'MA
 CREATE TYPE "CustomerType" AS ENUM ('CPF', 'CNPJ');
 
 -- CreateEnum
-CREATE TYPE "EntityType" AS ENUM ('USER', 'STORE', 'CUSTOMER');
+CREATE TYPE "EntityType" AS ENUM ('USER', 'STORE', 'CUSTOMER', 'ORDER', 'SERVICE', 'SUB_SERVICE');
+
+-- CreateEnum
+CREATE TYPE "EntityMediaType" AS ENUM ('ORDER', 'SERVICE', 'SUB_SERVICE');
 
 -- CreateEnum
 CREATE TYPE "PaymentType" AS ENUM ('PIX', 'CASH', 'CARD');
@@ -117,6 +120,7 @@ CREATE TABLE "customers" (
     "id" UUID NOT NULL,
     "store_id" UUID NOT NULL,
     "name" VARCHAR(255) NOT NULL,
+    "email" VARCHAR(255) NOT NULL,
     "customer_type" "CustomerType" NOT NULL DEFAULT 'CPF',
     "document" VARCHAR(18) NOT NULL,
     "instagram" VARCHAR(255),
@@ -194,6 +198,35 @@ CREATE TABLE "contacts" (
     CONSTRAINT "contacts_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "media" (
+    "id" UUID NOT NULL,
+    "url" TEXT NOT NULL,
+    "alt_text" VARCHAR(255),
+    "is_pre_service" BOOLEAN NOT NULL DEFAULT false,
+    "entity_type" "EntityMediaType" NOT NULL,
+    "entity_id" UUID NOT NULL,
+    "media_type_id" UUID NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "deleted_at" DATE,
+    "lgpd_excluded_at" DATE,
+
+    CONSTRAINT "media_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "media_types" (
+    "id" UUID NOT NULL,
+    "store_id" UUID NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "deleted_at" DATE,
+
+    CONSTRAINT "media_types_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
@@ -201,22 +234,10 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "users_document_key" ON "users"("document");
 
 -- CreateIndex
-CREATE INDEX "users_created_at_updated_at_idx" ON "users"("created_at", "updated_at");
-
--- CreateIndex
-CREATE INDEX "users_status_idx" ON "users"("status");
-
--- CreateIndex
 CREATE UNIQUE INDEX "stores_document_key" ON "stores"("document");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "stores_email_key" ON "stores"("email");
-
--- CreateIndex
-CREATE INDEX "stores_name_idx" ON "stores"("name");
-
--- CreateIndex
-CREATE INDEX "stores_created_at_updated_at_idx" ON "stores"("created_at", "updated_at");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "stripe_subscription_store_id_key" ON "stripe_subscription"("store_id");
@@ -234,12 +255,6 @@ CREATE INDEX "stripe_subscription_subscription_status_idx" ON "stripe_subscripti
 CREATE INDEX "services_store_id_idx" ON "services"("store_id");
 
 -- CreateIndex
-CREATE INDEX "services_is_published_idx" ON "services"("is_published");
-
--- CreateIndex
-CREATE INDEX "services_value_fixed_idx" ON "services"("value_fixed");
-
--- CreateIndex
 CREATE INDEX "sub_services_service_id_idx" ON "sub_services"("service_id");
 
 -- CreateIndex
@@ -247,6 +262,9 @@ CREATE UNIQUE INDEX "customers_document_key" ON "customers"("document");
 
 -- CreateIndex
 CREATE INDEX "customers_store_id_idx" ON "customers"("store_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "customers_store_id_document_key" ON "customers"("store_id", "document");
 
 -- CreateIndex
 CREATE INDEX "orders_store_id_customer_id_idx" ON "orders"("store_id", "customer_id");
@@ -274,6 +292,12 @@ CREATE UNIQUE INDEX "contacts_email_key" ON "contacts"("email");
 
 -- CreateIndex
 CREATE INDEX "contacts_type_entity_idx" ON "contacts"("type_entity");
+
+-- CreateIndex
+CREATE INDEX "media_entity_type_entity_id_idx" ON "media"("entity_type", "entity_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "media_types_store_id_name_key" ON "media_types"("store_id", "name");
 
 -- AddForeignKey
 ALTER TABLE "users_tokens" ADD CONSTRAINT "users_tokens_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -316,3 +340,9 @@ ALTER TABLE "order_sub_service" ADD CONSTRAINT "order_sub_service_service_id_fke
 
 -- AddForeignKey
 ALTER TABLE "order_sub_service" ADD CONSTRAINT "order_sub_service_sub_service_id_fkey" FOREIGN KEY ("sub_service_id") REFERENCES "sub_services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "media" ADD CONSTRAINT "media_media_type_id_fkey" FOREIGN KEY ("media_type_id") REFERENCES "media_types"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "media_types" ADD CONSTRAINT "media_types_store_id_fkey" FOREIGN KEY ("store_id") REFERENCES "stores"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
