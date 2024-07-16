@@ -1,5 +1,4 @@
 import { InvalidCredentialsError } from '@/shared/application/errors/invalid-credentials-error';
-import { NotFoundError } from '@/shared/application/errors/not-found-error';
 import { Router } from 'express';
 
 const routes = Router();

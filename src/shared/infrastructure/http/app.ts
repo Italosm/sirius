@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import express, { NextFunction, Request, Response } from 'express';
 import routes from './routes';
-import AppError from '@/shared/middleware/application-error';
 import DomainError from '@/shared/middleware/domain-error';
 import { NotFoundError } from '@/shared/application/errors/not-found-error';
+import ApplicationError from '@/shared/middleware/application-error';
 
 const app = express();
 
@@ -17,10 +17,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(
   (error: Error, request: Request, response: Response, next: NextFunction) => {
-    if (error instanceof AppError || error instanceof DomainError) {
+    if (error instanceof ApplicationError || error instanceof DomainError) {
       return response.status(error.statusCode).json({
         status: 'error',
         message: error.message,
+        name: error.name,
       });
     }
     console.log(error);
