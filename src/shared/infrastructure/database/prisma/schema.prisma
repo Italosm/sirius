@@ -122,6 +122,7 @@ model Store {
   customers          Customer[]
   orders             Order[]
   media_types        MediaType[]
+  Appointment        Appointment[]
 
   @@map("stores")
 }
@@ -143,20 +144,21 @@ model StripeSubscription {
 }
 
 model Service {
-  id                String            @id @db.Uuid
-  store_id          String            @db.Uuid
-  store             Store             @relation(fields: [store_id], references: [id])
-  name              String            @db.VarChar(255)
-  value_fixed       Boolean           @default(false)
-  is_published      Boolean           @default(false)
-  retail            Decimal?          @db.Decimal(10, 2)
-  wholesale         Decimal?          @db.Decimal(10, 2)
-  created_at        DateTime          @default(now())
-  updated_at        DateTime          @updatedAt
-  deleted_at        DateTime?         @db.Date
-  sub_service       SubService[]
-  order_service     OrderService[]
-  order_sub_service OrderSubService[]
+  id                 String               @id @db.Uuid
+  store_id           String               @db.Uuid
+  store              Store                @relation(fields: [store_id], references: [id])
+  name               String               @db.VarChar(255)
+  value_fixed        Boolean              @default(false)
+  is_published       Boolean              @default(false)
+  retail             Decimal?             @db.Decimal(10, 2)
+  wholesale          Decimal?             @db.Decimal(10, 2)
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  deleted_at         DateTime?            @db.Date
+  sub_service        SubService[]
+  order_service      OrderService[]
+  order_sub_service  OrderSubService[]
+  AppointmentService AppointmentService[]
 
   @@index([store_id])
   @@map("services")
@@ -181,27 +183,28 @@ model SubService {
 }
 
 model Customer {
-  id               String       @id @db.Uuid
-  store_id         String       @db.Uuid
-  store            Store        @relation(fields: [store_id], references: [id])
-  name             String       @db.VarChar(255)
-  email            String       @db.VarChar(255)
-  customer_type    CustomerType @default(CPF)
-  document         String       @unique @db.VarChar(18)
-  instagram        String?      @db.VarChar(255)
-  birth_date       DateTime     @db.Date
-  address          String       @db.VarChar(255)
-  cep              String       @db.VarChar(255)
-  complement       String?      @db.VarChar(255)
-  neighborhood     String       @db.VarChar(255)
-  number           String       @db.VarChar(255)
-  city             String       @db.VarChar(255)
-  state            String       @db.VarChar(255)
-  created_at       DateTime     @default(now())
-  updated_at       DateTime     @updatedAt
-  deleted_at       DateTime?    @db.Date
-  lgpd_excluded_at DateTime?    @db.Date
+  id               String        @id @db.Uuid
+  store_id         String        @db.Uuid
+  store            Store         @relation(fields: [store_id], references: [id])
+  name             String        @db.VarChar(255)
+  email            String        @db.VarChar(255)
+  customer_type    CustomerType  @default(CPF)
+  document         String        @unique @db.VarChar(18)
+  instagram        String?       @db.VarChar(255)
+  birth_date       DateTime      @db.Date
+  address          String        @db.VarChar(255)
+  cep              String        @db.VarChar(255)
+  complement       String?       @db.VarChar(255)
+  neighborhood     String        @db.VarChar(255)
+  number           String        @db.VarChar(255)
+  city             String        @db.VarChar(255)
+  state            String        @db.VarChar(255)
+  created_at       DateTime      @default(now())
+  updated_at       DateTime      @updatedAt
+  deleted_at       DateTime?     @db.Date
+  lgpd_excluded_at DateTime?     @db.Date
   orders           Order[]
+  Appointment      Appointment[]
 
   @@unique([store_id, document])
   @@index([store_id])
@@ -310,4 +313,35 @@ model MediaType {
 
   @@unique([store_id, name])
   @@map("media_types")
+}
+
+model Appointment {
+  id                  String               @id @db.Uuid
+  customer_id         String               @db.Uuid
+  customer            Customer             @relation(fields: [customer_id], references: [id])
+  store_id            String               @db.Uuid
+  store               Store                @relation(fields: [store_id], references: [id])
+  retail              Decimal              @db.Decimal(10, 2)
+  wholesale           Decimal?             @db.Decimal(10, 2)
+  is_wholesale        Boolean              @default(false)
+  status              Boolean              @default(true)
+  payment_method      PaymentType          @default(CASH)
+  expiration_date     DateTime?            @db.Date
+  created_at          DateTime             @default(now())
+  updated_at          DateTime             @updatedAt
+  deleted_at          DateTime?            @db.Date
+  appointment_service AppointmentService[]
+
+  @@index([store_id, customer_id])
+  @@index([store_id])
+  @@index([customer_id])
+  @@map("appointments")
+}
+
+model AppointmentService {
+  id             String      @id @db.Uuid
+  appointment_id String      @db.Uuid
+  appointment    Appointment @relation(fields: [appointment_id], references: [id])
+  service_id     String      @db.Uuid
+  service        Service     @relation(fields: [service_id], references: [id])
 }
