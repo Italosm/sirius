@@ -1,7 +1,6 @@
-import DomainError from '@/shared/middleware/domain-error';
+import ApplicationError from '@/shared/errors/application-error';
 
-export class NotFoundError extends DomainError {
-  public readonly name: string;
+export class NotFoundError extends ApplicationError {
   constructor(public message: string) {
     super(message, 404);
     this.name = 'NotFoundError';

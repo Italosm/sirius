@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import express, { NextFunction, Request, Response } from 'express';
 import routes from './routes';
-import DomainError from '@/shared/middleware/domain-error';
+import DomainError from '@/shared/errors/domain-error';
 import { NotFoundError } from '@/shared/application/errors/not-found-error';
-import ApplicationError from '@/shared/middleware/application-error';
+import ApplicationError from '@/shared/errors/application-error';
 
 const app = express();
 

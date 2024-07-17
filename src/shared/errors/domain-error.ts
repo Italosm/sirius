@@ -1,10 +1,10 @@
-class DomainError {
-  public readonly message: string;
+class DomainError extends Error {
   public readonly statusCode: number;
 
   constructor(message: string, statusCode = 400) {
-    this.message = message;
+    super(message);
     this.statusCode = statusCode;
+    this.name = 'DomainError';
   }
 }
 
