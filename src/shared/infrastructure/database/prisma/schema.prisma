@@ -98,24 +98,24 @@ model User {
 }
 
 model Store {
-  id                 String              @id @db.Uuid
-  name               String              @db.VarChar(255)
-  slogan             String?             @db.VarChar(255)
-  document           String              @unique @db.VarChar(18)
-  email              String              @unique @db.VarChar(255)
-  instagram          String?             @db.VarChar(255)
-  address            String              @db.VarChar(255)
-  cep                String              @db.VarChar(255)
-  complement         String?             @db.VarChar(255)
-  neighborhood       String              @db.VarChar(255)
-  number             String              @db.VarChar(255)
-  city               String              @db.VarChar(255)
-  state              String              @db.VarChar(255)
-  logo               String?             @db.Text
-  created_at         DateTime            @default(now())
-  updated_at         DateTime            @updatedAt
-  deleted_at         DateTime?           @db.Date
-  lgpd_excluded_at   DateTime?           @db.Date
+  id                 String               @id @db.Uuid
+  name               String               @db.VarChar(255)
+  slogan             String?              @db.VarChar(255)
+  document           String               @unique @db.VarChar(18)
+  email              String               @unique @db.VarChar(255)
+  instagram          String?              @db.VarChar(255)
+  address            String               @db.VarChar(255)
+  cep                String               @db.VarChar(255)
+  complement         String?              @db.VarChar(255)
+  neighborhood       String               @db.VarChar(255)
+  number             String               @db.VarChar(255)
+  city               String               @db.VarChar(255)
+  state              String               @db.VarChar(255)
+  logo               String?              @db.Text
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  deleted_at         DateTime?            @db.Date
+  lgpd_excluded_at   DateTime?            @db.Date
   users              User[]
   stripeSubscription StripeSubscription?
   services           Service[]
@@ -123,6 +123,7 @@ model Store {
   orders             Order[]
   media_types        MediaType[]
   Appointment        Appointment[]
+  AppointmentService AppointmentService[]
 
   @@map("stores")
 }
@@ -327,6 +328,7 @@ model Appointment {
   status              Boolean              @default(true)
   payment_method      PaymentType          @default(CASH)
   expiration_date     DateTime?            @db.Date
+  note                String               @db.Text
   created_at          DateTime             @default(now())
   updated_at          DateTime             @updatedAt
   deleted_at          DateTime?            @db.Date
@@ -344,4 +346,11 @@ model AppointmentService {
   appointment    Appointment @relation(fields: [appointment_id], references: [id])
   service_id     String      @db.Uuid
   service        Service     @relation(fields: [service_id], references: [id])
+  store_id       String      @db.Uuid
+  store          Store       @relation(fields: [store_id], references: [id])
+
+  @@index([appointment_id])
+  @@index([service_id])
+  @@index([store_id])
+  @@map("appointment_service")
 }
