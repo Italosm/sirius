@@ -4,6 +4,7 @@ export interface NavItemProps {
   url: string;
   label: string;
   isActive?: boolean;
+  newTab?: boolean;
 }
 export function NavItem(props: NavItemProps) {
   return (
@@ -17,6 +18,7 @@ export function NavItem(props: NavItemProps) {
           }
         `}
         href={props.url}
+        target={props.newTab ? "_blank" : "_self"}
       >
         {props.label}
       </Link>
