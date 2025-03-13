@@ -57,7 +57,7 @@ export function Navbar() {
         className="bg-primary flex justify-between p-4 no-underline"
       >
         <div onClick={closeMenu}>
-          <Link href="/" className="text-blue-400 hover:text-white">
+          <Link href="/" className="hover:text-accent">
             Sirius
           </Link>
         </div>
@@ -85,8 +85,8 @@ export function Navbar() {
         </ul>
         <ul
           className={`${
-            openMenu ? 'flex' : 'flex opacity-0'
-          } absolute top-14 left-0 z-10 w-full list-none flex-col gap-4 bg-black py-4 transition-opacity duration-300 ease-in-out`}
+            openMenu ? 'flex' : 'hidden'
+          } bg-background absolute top-14 left-0 z-10 w-full list-none flex-col gap-4 py-4`}
         >
           {items.map((item, index) => (
             <MobileNavItem

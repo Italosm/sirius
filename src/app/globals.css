@@ -1,10 +1,5 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme {
   --color-white: #ffffff;
   --color-black: #000;
@@ -38,10 +33,10 @@
   --color-silver-galactic: #c0c0c0; /* Prata Galáctica */
 
   /* Cores temáticas */
-  --color-primary: var(--color-blue-cosmic);
+  --color-primary: var(--color-blue-stellar);
   --color-primary-contrast: var(--color-white-celestial);
   --color-secondary: var(--color-purple-nebula);
-  --color-secondary-contrast: var(--color-white);
+  --color-secondary-contrast: var(--color-white-celestial);
   --color-accent: var(--color-yellow-solar);
 
   /* Cores de fundo */
@@ -49,7 +44,7 @@
   --color-paper: var(--color-gray-700);
 
   /* Cores de texto */
-  --color-text: var(--color-white-celestial);
+  --color-text: var(--color-gray-100);
   --color-text-muted: var(--color-gray-200);
   --color-text-error: var(--color-red-comet);
 
@@ -71,20 +66,52 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-background: var(--color-gray-800);
+    --color-paper: var(--color-gray-700);
+    --color-text: var(--color-gray-100);
+    --color-text-muted: var(--color-gray-200);
+    --color-border: var(--color-gray-asteroid);
+    --color-primary: var(--color-blue-stellar);
+    --color-secondary: var(--color-purple-nebula);
+    --color-accent: var(--color-yellow-solar);
+    --color-button-primary: var(--color-yellow-solar);
+    --color-button-secondary: var(--color-purple-nebula);
+    --color-overlay: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-background: var(--color-gray-100);
+    --color-paper: var(--color-white);
+    --color-text: var(--color-gray-900);
+    --color-text-muted: var(--color-gray-500);
+    --color-border: var(--color-gray-400);
+    --color-primary: var(--color-blue-stellar);
+    --color-primary-contrast: var(--color-blue-cosmic);
+    --color-secondary: var(--color-purple-nebula);
+    --color-secondary-contrast: var(--color-white-celestial);
+    --color-accent: var(--color-orange-supernova);
+    --color-button-primary: var(--color-yellow-solar);
+    --color-button-primary-hover: var(--color-orange-supernova);
+    --color-button-secondary: var(--color-purple-star-dust);
+    --color-button-secondary-hover: var(--color-purple-nebula);
+    --color-success: var(--color-green-deep-space);
+    --color-warning: var(--color-orange-supernova);
+    --color-error: var(--color-red-comet);
+    --color-overlay: rgba(255, 255, 255, 0.7);
   }
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--color-background);
   font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text);
   margin: 0;
   padding: 0;
   line-height: 1.6;
 }
 
 header {
-  color: var(--color-primary-contrast);
   text-align: center;
 }

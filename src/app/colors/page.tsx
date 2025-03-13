@@ -119,12 +119,8 @@ const colorNameMap: Record<string, string> = {
   '#b1afa1': 'Gray Cosmic Fog',
   '#8a8a8a': 'Gray Asteroid',
   '#c0c0c0': 'Silver Galactic',
-
-  // Additional mappings for any colors not covered
-  '#ffffff': 'White',
 };
 
-// Get friendly name for a color, with fallback to hex
 const getColorName = (hex: string): string => {
   return colorNameMap[hex] || hex;
 };
@@ -142,20 +138,6 @@ function getTextColor(hex: string) {
   return luminance > 0.5 ? '#000' : '#fff';
 }
 
-// Format long color names for better mobile display
-const formatColorName = (name: string): string => {
-  // Abbreviate certain long names for mobile
-  if (name === 'buttonPrimaryHover') return 'btn-primary-hover';
-  if (name === 'buttonSecondaryHover') return 'btn-secondary-hover';
-  if (name === 'secondaryContrast') return 'second-contrast';
-  if (name === 'primaryContrast') return 'prim-contrast';
-  if (name.length > 15) {
-    return name.replace(/([A-Z])/g, '-$1').toLowerCase();
-  }
-  return name;
-};
-
-// UI Elements to showcase how colors look in various components
 const PalettePreview = ({ palette }: { palette: Palette }) => {
   return (
     <div className="flex w-full flex-col space-y-4">
@@ -283,7 +265,7 @@ const PaletteDisplay = ({
                   }}
                 >
                   <p className="mb-1 text-sm font-medium break-words capitalize">
-                    {formatColorName(colorRole)}
+                    {colorRole}
                   </p>
                   <p className="text-xs opacity-80">{getColorName(hexValue)}</p>
 
