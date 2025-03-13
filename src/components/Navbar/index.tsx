@@ -13,6 +13,10 @@ export function Navbar() {
       label: 'Home',
     },
     {
+      url: '/colors',
+      label: 'Cores',
+    },
+    {
       url: '/about',
       label: 'Sobre',
     },
@@ -50,7 +54,7 @@ export function Navbar() {
     <header>
       <nav
         ref={navRef}
-        className="flex justify-between bg-black p-4 no-underline"
+        className="bg-primary flex justify-between p-4 no-underline"
       >
         <div onClick={closeMenu}>
           <Link href="/" className="text-blue-400 hover:text-white">

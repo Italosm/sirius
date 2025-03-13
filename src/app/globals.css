@@ -1,41 +1,83 @@
 @import 'tailwindcss';
 
 :root {
-  /* Cores principais */
-  --color-primary: #0d1b2a; /* Azul Cósmico */
-  --color-primary-contrast: #f8f9fa; /* Branco Celestial */
-  --color-secondary: #5e2bff; /* Roxo Nebuloso */
-  --color-secondary-contrast: #ffffff; /* Branco */
-  --color-accent: #ffd700; /* Amarelo Solar */
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  --color-white: #ffffff;
+  --color-black: #000;
+
+  --color-gray-100: #e1e1e6;
+  --color-gray-200: #a9a9b2;
+  --color-gray-400: #7c7c8a;
+  --color-gray-500: #505059;
+  --color-gray-600: #323238;
+  --color-gray-700: #29292e;
+  --color-gray-800: #202024;
+  --color-gray-900: #121214;
+
+  /* Cores inspiradas na Via Láctea */
+  --color-blue-cosmic: #0d1b2a; /* Azul Cósmico */
+  --color-purple-nebula: #5e2bff; /* Roxo Nebuloso */
+  --color-blue-stellar: #1b6ca8; /* Azul Estelar */
+  --color-pink-galactic: #ff4f8b; /* Rosa Galáctico */
+  --color-white-celestial: #f8f9fa; /* Branco Celestial */
+  --color-yellow-solar: #ffd700; /* Amarelo Solar */
+
+  /* Cores adicionais */
+  --color-green-deep-space: #0d3b2e; /* Verde Profundo do Espaço */
+  --color-red-comet: #d55c5c; /* Vermelho de Cometa */
+  --color-purple-star-dust: #a34dff; /* Pó de Estrela */
+  --color-black-hole: #111111; /* Preto de Buraco Negro */
+  --color-blue-nebula: #3d67a6; /* Azul Nebuloso */
+  --color-orange-supernova: #ff6f20; /* Laranja Supernova */
+  --color-gray-cosmic-fog: #b1afa1; /* Névoa Cósmica */
+  --color-gray-asteroid: #8a8a8a; /* Cinza de Asteroide */
+  --color-silver-galactic: #c0c0c0; /* Prata Galáctica */
+
+  /* Cores temáticas */
+  --color-primary: var(--color-blue-cosmic);
+  --color-primary-contrast: var(--color-white-celestial);
+  --color-secondary: var(--color-purple-nebula);
+  --color-secondary-contrast: var(--color-white);
+  --color-accent: var(--color-yellow-solar);
 
   /* Cores de fundo */
-  --color-background: #202024; /* Fundo escuro (Gray 800) */
-  --color-paper: #29292e; /* Cor de fundo de papel */
+  --color-background: var(--color-gray-800);
+  --color-paper: var(--color-gray-700);
 
   /* Cores de texto */
-  --color-text: #f8f9fa; /* Branco Celestial */
-  --color-text-muted: #a9a9b2; /* Gray 200 (Texto mais suave) */
-  --color-text-error: #d55c5c; /* Vermelho de Cometa para erro */
+  --color-text: var(--color-white-celestial);
+  --color-text-muted: var(--color-gray-200);
+  --color-text-error: var(--color-red-comet);
 
   /* Cores para botões e interações */
-  --color-button-primary: #ffd700; /* Amarelo Solar */
-  --color-button-primary-hover: #ff6f20; /* Laranja Supernova */
-  --color-button-secondary: #5e2bff; /* Roxo Nebuloso */
-  --color-button-secondary-hover: #3d67a6; /* Azul Nebuloso */
+  --color-button-primary: var(--color-yellow-solar);
+  --color-button-primary-hover: var(--color-orange-supernova);
+  --color-button-secondary: var(--color-purple-nebula);
+  --color-button-secondary-hover: var(--color-blue-nebula);
 
   /* Cores de estado e destaque */
-  --color-success: #0d3b2e; /* Verde Profundo do Espaço */
-  --color-warning: #ff6f20; /* Laranja Supernova */
-  --color-error: #d55c5c; /* Vermelho de Cometa */
+  --color-success: var(--color-green-deep-space);
+  --color-warning: var(--color-orange-supernova);
+  --color-error: var(--color-red-comet);
 
   /* Outras cores */
-  --color-border: #8a8a8a; /* Cinza de Asteroide */
+  --color-border: var(--color-gray-asteroid);
   --color-overlay: rgba(0, 0, 0, 0.5); /* Sobreposição escura */
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
 body {
-  background-color: var(--color-background);
-  color: var(--color-text);
+  background-color: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
@@ -43,7 +85,6 @@ body {
 }
 
 header {
-  background-color: var(--color-primary);
   color: var(--color-primary-contrast);
   text-align: center;
 }
