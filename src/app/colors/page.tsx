@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const colors = {
   gray: {
@@ -142,6 +142,19 @@ function getTextColor(hex: string) {
   return luminance > 0.5 ? '#000' : '#fff';
 }
 
+// Format long color names for better mobile display
+const formatColorName = (name: string): string => {
+  // Abbreviate certain long names for mobile
+  if (name === 'buttonPrimaryHover') return 'btn-primary-hover';
+  if (name === 'buttonSecondaryHover') return 'btn-secondary-hover';
+  if (name === 'secondaryContrast') return 'second-contrast';
+  if (name === 'primaryContrast') return 'prim-contrast';
+  if (name.length > 15) {
+    return name.replace(/([A-Z])/g, '-$1').toLowerCase();
+  }
+  return name;
+};
+
 // UI Elements to showcase how colors look in various components
 const PalettePreview = ({ palette }: { palette: Palette }) => {
   return (
@@ -167,21 +180,21 @@ const PalettePreview = ({ palette }: { palette: Palette }) => {
           This is how text appears on your background color.
         </p>
 
-        {/* Buttons row */}
-        <div className="mt-4 flex space-x-2">
+        {/* Buttons row - Fixed for mobile */}
+        <div className="mt-4 flex flex-wrap gap-2">
           <button
-            className="rounded-md px-4 py-2 text-sm font-medium"
+            className="rounded-md px-3 py-2 text-xs font-medium sm:text-sm"
             style={{
               backgroundColor: palette.primary,
               color: getTextColor(palette.primary),
             }}
           >
-            Primary Button
+            Primary
           </button>
 
           {palette.secondary && (
             <button
-              className="rounded-md px-4 py-2 text-sm font-medium"
+              className="rounded-md px-3 py-2 text-xs font-medium sm:text-sm"
               style={{
                 backgroundColor: palette.secondary,
                 color: getTextColor(palette.secondary),
@@ -192,7 +205,7 @@ const PalettePreview = ({ palette }: { palette: Palette }) => {
           )}
 
           <button
-            className="rounded-md px-4 py-2 text-sm font-medium"
+            className="rounded-md px-3 py-2 text-xs font-medium sm:text-sm"
             style={{
               backgroundColor: palette.accent,
               color: getTextColor(palette.accent),
@@ -231,7 +244,10 @@ const PaletteDisplay = ({
 
   return (
     <div className="mb-8 overflow-hidden rounded-lg border border-gray-700">
-      <div className="p-5" style={{ backgroundColor: palette.background }}>
+      <div
+        className="p-3 sm:p-5"
+        style={{ backgroundColor: palette.background }}
+      >
         <h3 className="mb-4 text-xl font-bold" style={{ color: palette.text }}>
           {name}
         </h3>
@@ -255,7 +271,7 @@ const PaletteDisplay = ({
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
               {Object.entries(palette).map(([colorRole, hexValue]) => (
                 <div
                   key={colorRole}
@@ -266,15 +282,17 @@ const PaletteDisplay = ({
                     boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
                   }}
                 >
-                  <p className="mb-1 font-medium capitalize">{colorRole}</p>
-                  <p className="text-sm opacity-80">{getColorName(hexValue)}</p>
+                  <p className="mb-1 text-sm font-medium break-words capitalize">
+                    {formatColorName(colorRole)}
+                  </p>
+                  <p className="text-xs opacity-80">{getColorName(hexValue)}</p>
 
                   {showColorDetail && (
                     <div
                       className="border-opacity-20 mt-2 border-t pt-2"
                       style={{ borderColor: getTextColor(hexValue) }}
                     >
-                      <p className="text-xs opacity-75">Hex: {hexValue}</p>
+                      <p className="text-xs break-all opacity-75">{hexValue}</p>
                       <p className="text-xs opacity-75">
                         RGB:{' '}
                         {hexValue
@@ -305,22 +323,24 @@ const PaletteDisplay = ({
 
 export default function ColorsPage() {
   return (
-    <div className="min-h-screen bg-gray-900 p-6 text-white">
-      <h1 className="mb-6 text-3xl font-bold">Color Palette</h1>
+    <div className="min-h-screen bg-gray-900 p-3 text-white sm:p-6">
+      <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Color Palette</h1>
 
       {/* Display individual colors by category */}
       {Object.entries(colors).map(([category, shades]) => (
         <div key={category} className="mb-8">
-          <h2 className="mb-4 text-2xl font-semibold capitalize">{category}</h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
+          <h2 className="mb-4 text-xl font-semibold capitalize sm:text-2xl">
+            {category}
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
             {Object.entries(shades).map(([name, hex]) => (
               <div
                 key={name}
-                className="rounded-lg p-4 shadow-md transition-transform duration-200 hover:scale-105"
+                className="rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105 sm:p-4"
                 style={{ backgroundColor: hex }}
               >
                 <p
-                  className="text-center text-sm font-medium"
+                  className="text-center text-sm font-medium break-words"
                   style={{ color: getTextColor(hex) }}
                 >
                   {name}
@@ -339,7 +359,9 @@ export default function ColorsPage() {
 
       {/* Display predefined palettes section */}
       <div className="mt-12 mb-8">
-        <h2 className="mb-6 text-2xl font-semibold">Predefined Palettes</h2>
+        <h2 className="mb-6 text-xl font-semibold sm:text-2xl">
+          Predefined Palettes
+        </h2>
 
         {Object.entries(palettes).map(([name, palette]) => (
           <PaletteDisplay key={name} name={name} palette={palette} />
