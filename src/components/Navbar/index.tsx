@@ -1,30 +1,30 @@
-"use client";
-import { NavItem, NavItemProps } from "@/components/NavItem";
-import { MobileNavItem } from "@/components/MobileNavItem";
-import Link from "next/link";
-import { FaBars, FaXmark } from "react-icons/fa6";
-import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+'use client';
+import { NavItem, NavItemProps } from '@/components/NavItem';
+import { MobileNavItem } from '@/components/MobileNavItem';
+import Link from 'next/link';
+import { FaBars, FaXmark } from 'react-icons/fa6';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect, useRef } from 'react';
 
 export function Navbar() {
   const items: NavItemProps[] = [
     {
-      url: "/",
-      label: "Home",
+      url: '/',
+      label: 'Home',
     },
     {
-      url: "/about",
-      label: "Sobre",
+      url: '/about',
+      label: 'Sobre',
     },
     {
-      url: "/contact",
-      label: "Contato",
+      url: '/contact',
+      label: 'Contato',
       newTab: true,
     },
   ];
   const pathName = usePathname();
-  const activeItem = items.find((item) => pathName === item.url);
-  const activeLabel = activeItem ? activeItem.label : "";
+  const activeItem = items.find(item => pathName === item.url);
+  const activeLabel = activeItem ? activeItem.label : '';
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -40,9 +40,9 @@ export function Navbar() {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -50,7 +50,7 @@ export function Navbar() {
     <header>
       <nav
         ref={navRef}
-        className="flex justify-between items-center p-4 bg-black no-underline relative"
+        className="flex justify-between bg-black p-4 no-underline"
       >
         <div onClick={closeMenu}>
           <Link href="/" className="text-blue-400 hover:text-white">
@@ -59,16 +59,16 @@ export function Navbar() {
         </div>
         <div className="flex items-center gap-4">
           {activeLabel && (
-            <span className="md:hidden text-white text-sm">{activeLabel}</span>
+            <span className="text-sm md:hidden">{activeLabel}</span>
           )}
           <button
-            className="md:hidden text-white bg-transparent cursor-pointer border-0"
+            className="cursor-pointer border-0 bg-transparent md:hidden"
             onClick={() => setOpenMenu(!openMenu)}
           >
             {openMenu ? <FaXmark /> : <FaBars />}
           </button>
         </div>
-        <ul className="hidden md:flex gap-8 mx-16 items-center list-none">
+        <ul className="mx-16 hidden list-none gap-8 md:flex">
           {items.map((item, index) => (
             <NavItem
               url={item.url}
@@ -81,8 +81,8 @@ export function Navbar() {
         </ul>
         <ul
           className={`${
-            openMenu ? "flex" : "hidden"
-          } absolute top-14 left-0 w-full bg-black flex-col items-center gap-4 py-4 md:hidden z-10`}
+            openMenu ? 'flex' : 'flex opacity-0'
+          } absolute top-14 left-0 z-10 w-full list-none flex-col gap-4 bg-black py-4 transition-opacity duration-300 ease-in-out`}
         >
           {items.map((item, index) => (
             <MobileNavItem

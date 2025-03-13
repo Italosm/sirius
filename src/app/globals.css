@@ -1,5 +1,49 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+:root {
+  /* Cores principais */
+  --color-primary: #0d1b2a; /* Azul Cósmico */
+  --color-primary-contrast: #f8f9fa; /* Branco Celestial */
+  --color-secondary: #5e2bff; /* Roxo Nebuloso */
+  --color-secondary-contrast: #ffffff; /* Branco */
+  --color-accent: #ffd700; /* Amarelo Solar */
+
+  /* Cores de fundo */
+  --color-background: #202024; /* Fundo escuro (Gray 800) */
+  --color-paper: #29292e; /* Cor de fundo de papel */
+
+  /* Cores de texto */
+  --color-text: #f8f9fa; /* Branco Celestial */
+  --color-text-muted: #a9a9b2; /* Gray 200 (Texto mais suave) */
+  --color-text-error: #d55c5c; /* Vermelho de Cometa para erro */
+
+  /* Cores para botões e interações */
+  --color-button-primary: #ffd700; /* Amarelo Solar */
+  --color-button-primary-hover: #ff6f20; /* Laranja Supernova */
+  --color-button-secondary: #5e2bff; /* Roxo Nebuloso */
+  --color-button-secondary-hover: #3d67a6; /* Azul Nebuloso */
+
+  /* Cores de estado e destaque */
+  --color-success: #0d3b2e; /* Verde Profundo do Espaço */
+  --color-warning: #ff6f20; /* Laranja Supernova */
+  --color-error: #d55c5c; /* Vermelho de Cometa */
+
+  /* Outras cores */
+  --color-border: #8a8a8a; /* Cinza de Asteroide */
+  --color-overlay: rgba(0, 0, 0, 0.5); /* Sobreposição escura */
+}
 
 body {
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+header {
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  text-align: center;
 }
