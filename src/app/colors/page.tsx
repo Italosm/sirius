@@ -305,7 +305,7 @@ const PaletteDisplay = ({
 
 export default function ColorsPage() {
   return (
-    <div className="min-h-screen bg-gray-900 p-3 text-white sm:p-6">
+    <div className="min-h-screen p-3 sm:p-6">
       <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Color Palette</h1>
 
       {/* Display individual colors by category */}

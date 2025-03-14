@@ -54,10 +54,10 @@ export function Navbar() {
     <header>
       <nav
         ref={navRef}
-        className="bg-primary flex justify-between p-4 no-underline"
+        className="bg-background/70 flex justify-between p-4 no-underline"
       >
         <div onClick={closeMenu}>
-          <Link href="/" className="hover:text-accent">
+          <Link href="/" className="hover:text-accent text-xl font-bold">
             Sirius
           </Link>
         </div>
@@ -86,7 +86,7 @@ export function Navbar() {
         <ul
           className={`${
             openMenu ? 'flex' : 'hidden'
-          } bg-background absolute top-14 left-0 z-10 w-full list-none flex-col gap-4 py-4`}
+          } bg-background/70 absolute top-15 left-0 z-10 w-full list-none flex-col gap-4 py-4`}
         >
           {items.map((item, index) => (
             <MobileNavItem
