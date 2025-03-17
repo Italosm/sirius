@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@theme inline {
+@theme {
   --color-white: #ffffff;
   --color-black: #000;
 
@@ -31,13 +31,14 @@
   --color-gray-cosmic-fog: #b1afa1; /* Névoa Cósmica */
   --color-gray-asteroid: #8a8a8a; /* Cinza de Asteroide */
   --color-silver-galactic: #c0c0c0; /* Prata Galáctica */
+  --color-blue-sirius: #a3e0f5;
 
   /* Cores temáticas */
   --color-primary: var(--color-blue-stellar);
   --color-primary-contrast: var(--color-white-celestial);
   --color-secondary: var(--color-purple-nebula);
-  --color-secondary-contrast: var(--color-white-celestial);
-  --color-accent: var(--color-red-stellar);
+  --color-secondary-contrast: var(--color-gray-100);
+  --color-accent: var(--color-blue-sirius);
 
   /* Cores de fundo */
   --color-background: var(--color-gray-800);
@@ -69,13 +70,13 @@
     --color-background: var(--color-gray-800);
     --color-paper: var(--color-gray-700);
     --color-text: var(--color-white-celestial);
-    --color-text-accent: var(--color-blue-stellar);
+    --color-text-accent: var(--color-blue-sirius);
     --color-text-muted: var(--color-gray-200);
     --color-border: var(--color-gray-asteroid);
     --color-primary: var(--color-blue-stellar);
     --color-secondary: var(--color-purple-nebula);
-    --color-accent: var(--color-yellow-solar);
-    --color-button-primary: var(--color-yellow-solar);
+    --color-accent: var(--color-blue-sirius);
+    --color-button-primary: var(--color-blue-stellar);
     --color-button-secondary: var(--color-purple-nebula);
     --color-overlay: rgba(0, 0, 0, 0.5);
   }
@@ -125,7 +126,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1); /* ajuste da opacidade */
+  background-color: rgba(0, 0, 0, 0.15); /* ajuste da opacidade */
   z-index: -1;
 }
 

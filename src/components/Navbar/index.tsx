@@ -13,8 +13,12 @@ export function Navbar() {
       label: 'Home',
     },
     {
-      url: '/colors',
-      label: 'Cores',
+      url: '/signin',
+      label: 'Entrar',
+    },
+    {
+      url: '/signup',
+      label: 'Cadastre-se',
     },
     {
       url: '/about',
@@ -54,7 +58,7 @@ export function Navbar() {
     <header>
       <nav
         ref={navRef}
-        className="bg-background/70 flex justify-between p-4 no-underline"
+        className="bg-overlay flex justify-between p-4 no-underline"
       >
         <div onClick={closeMenu}>
           <Link href="/" className="hover:text-accent text-xl font-bold">
@@ -86,7 +90,7 @@ export function Navbar() {
         <ul
           className={`${
             openMenu ? 'flex' : 'hidden'
-          } bg-background/70 absolute top-15 left-0 z-10 w-full list-none flex-col gap-4 py-4`}
+          } bg-overlay absolute top-15 left-0 z-10 w-full list-none flex-col gap-4 py-4 md:hidden`}
         >
           {items.map((item, index) => (
             <MobileNavItem

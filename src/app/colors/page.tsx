@@ -19,6 +19,7 @@ const colors = {
     pinkGalactic: '#ff4f8b',
     whiteCelestial: '#f8f9fa',
     yellowSolar: '#ffd700',
+    redStellar: '#8e6e70',
   },
   additional: {
     greenDeepSpace: '#0d3b2e',
@@ -30,13 +31,14 @@ const colors = {
     grayCosmicFog: '#b1afa1',
     grayAsteroid: '#8a8a8a',
     silverGalactic: '#c0c0c0',
+    blueSirius: '#a3e0f5',
   },
   theme: {
-    primary: '#0d1b2a',
+    primary: '#1b6ca8',
     primaryContrast: '#f8f9fa',
     secondary: '#5e2bff',
-    secondaryContrast: '#ffffff',
-    accent: '#ffd700',
+    secondaryContrast: '#e1e1e6',
+    accent: '#a3e0f5',
     background: '#202024',
     paper: '#29292e',
     text: '#f8f9fa',
@@ -66,6 +68,14 @@ type Palette = {
 type Palettes = Record<string, Palette>;
 
 const palettes: Palettes = {
+  Sirius: {
+    background: '#202024',
+    primary: '#1b6ca8',
+    secondary: '#5e2bff',
+    accent: '#a3e0f5',
+    text: '#f8f9fa',
+    error: '#d55c5c',
+  },
   'Espaço Profundo': {
     background: '#0d1b2a',
     primary: '#5e2bff',
@@ -108,6 +118,7 @@ const colorNameMap: Record<string, string> = {
   '#ff4f8b': 'Pink Galactic',
   '#f8f9fa': 'White Celestial',
   '#ffd700': 'Yellow Solar',
+  '#a3e0f5': 'Blue Sirius',
 
   // Additional colors
   '#0d3b2e': 'Green Deep Space',
@@ -306,6 +317,7 @@ const PaletteDisplay = ({
 export default function ColorsPage() {
   return (
     <div className="min-h-screen p-3 sm:p-6">
+      <PaletteDisplay name="Sirius Palette" palette={palettes.Sirius} />
       <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Color Palette</h1>
 
       {/* Display individual colors by category */}
