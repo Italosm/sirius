@@ -1,6 +1,5 @@
 'use client';
 import { NavItem, NavItemProps } from '@/components/NavItem';
-import { MobileNavItem } from '@/components/MobileNavItem';
 import Link from 'next/link';
 import { FaBars, FaXmark } from 'react-icons/fa6';
 import { usePathname } from 'next/navigation';
@@ -93,7 +92,7 @@ export function Navbar() {
           } bg-overlay absolute top-15 left-0 z-10 w-full list-none flex-col gap-4 py-4 md:hidden`}
         >
           {items.map((item, index) => (
-            <MobileNavItem
+            <NavItem
               url={item.url}
               label={item.label}
               key={index}
