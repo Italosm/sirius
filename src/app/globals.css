@@ -37,7 +37,7 @@
   --color-primary: var(--color-blue-stellar);
   --color-primary-contrast: var(--color-white-celestial);
   --color-secondary: var(--color-purple-nebula);
-  --color-secondary-contrast: var(--color-gray-100);
+  --color-secondary-contrast: var(--color-gray-600);
   --color-accent: var(--color-blue-sirius);
 
   /* Cores de fundo */
@@ -50,10 +50,10 @@
   --color-text-error: var(--color-red-comet);
 
   /* Cores para botões e interações */
-  --color-button-primary: var(--color-yellow-solar);
-  --color-button-primary-hover: var(--color-orange-supernova);
-  --color-button-secondary: var(--color-purple-nebula);
-  --color-button-secondary-hover: var(--color-blue-nebula);
+  --color-button-secondary: var(--color-yellow-solar);
+  --color-button-secondary-hover: var(--color-orange-supernova);
+  --color-button-primary: var(--color-purple-nebula);
+  --color-button-primary-hover: var(--color-blue-nebula);
 
   /* Cores de estado e destaque */
   --color-success: var(--color-green-deep-space);
@@ -86,7 +86,7 @@
   :root {
     --color-background: var(--color-gray-100);
     --color-paper: var(--color-white);
-    --color-text: var(--color-gray-900);
+    --color-text: var(--color-white-celestial);
     --color-text-muted: var(--color-gray-500);
     --color-border: var(--color-gray-400);
     --color-primary: var(--color-blue-stellar);
@@ -117,19 +117,4 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-}
-
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.15); /* ajuste da opacidade */
-  z-index: -1;
-}
-
-header {
-  text-align: center;
 }

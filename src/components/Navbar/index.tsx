@@ -54,7 +54,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header>
+    <header className="text-center">
       <nav
         ref={navRef}
         className="bg-overlay flex justify-between p-4 no-underline"
@@ -64,7 +64,7 @@ export function Navbar() {
             Sirius
           </Link>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex gap-4">
           {activeLabel && (
             <span className="text-sm md:hidden">{activeLabel}</span>
           )}
@@ -89,7 +89,7 @@ export function Navbar() {
         <ul
           className={`${
             openMenu ? 'flex' : 'hidden'
-          } bg-overlay absolute top-15 left-0 z-10 w-full list-none flex-col gap-4 py-4 md:hidden`}
+          } bg-overlay absolute top-15 left-0 z-1 w-full list-none flex-col gap-4 py-4 md:hidden`}
         >
           {items.map((item, index) => (
             <NavItem
