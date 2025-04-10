@@ -66,7 +66,9 @@ export function Navbar() {
         </div>
         <div className="flex gap-4">
           {activeLabel && (
-            <span className="text-sm md:hidden">{activeLabel}</span>
+            <span className="flex items-center text-sm md:hidden">
+              {activeLabel}
+            </span>
           )}
           <button
             className="cursor-pointer border-0 bg-transparent md:hidden"
