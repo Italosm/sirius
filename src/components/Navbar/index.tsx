@@ -57,7 +57,7 @@ export function Navbar() {
     <header className="text-center">
       <nav
         ref={navRef}
-        className="bg-overlay flex justify-between p-4 no-underline"
+        className="bg-overlay flex h-14 justify-between p-4 no-underline"
       >
         <div onClick={closeMenu}>
           <Link href="/" className="hover:text-accent text-xl font-bold">
@@ -91,7 +91,7 @@ export function Navbar() {
         <ul
           className={`${
             openMenu ? 'flex' : 'hidden'
-          } bg-overlay absolute top-15 left-0 z-1 w-full list-none flex-col gap-4 py-4 md:hidden`}
+          } bg-overlay absolute top-14 left-0 z-1 w-full list-none flex-col gap-4 py-4 md:hidden`}
         >
           {items.map((item, index) => (
             <NavItem

@@ -23,6 +23,7 @@
   --color-red-stellar: #8e6e70;
   /* Cores adicionais */
   --color-green-deep-space: #0d3b2e; /* Verde Profundo do Espaço */
+  --color-green-space: #86efac;
   --color-red-comet: #d55c5c; /* Vermelho de Cometa */
   --color-purple-star-dust: #a34dff; /* Pó de Estrela */
   --color-black-hole: #111111; /* Preto de Buraco Negro */
@@ -57,6 +58,7 @@
 
   /* Cores de estado e destaque */
   --color-success: var(--color-green-deep-space);
+  --color-success-light: var(--color-green-space);
   --color-warning: var(--color-orange-supernova);
   --color-error: var(--color-red-comet);
 
@@ -76,6 +78,7 @@
     --color-primary: var(--color-blue-stellar);
     --color-secondary: var(--color-purple-nebula);
     --color-accent: var(--color-blue-sirius);
+    --color-success: var(--color-green-space);
     --color-button-primary: var(--color-blue-stellar);
     --color-button-secondary: var(--color-purple-nebula);
     --color-overlay: rgba(0, 0, 0, 0.5);
@@ -98,7 +101,7 @@
     --color-button-primary-hover: var(--color-orange-supernova);
     --color-button-secondary: var(--color-purple-star-dust);
     --color-button-secondary-hover: var(--color-purple-nebula);
-    --color-success: var(--color-green-deep-space);
+    --color-success: var(--color-green-space);
     --color-warning: var(--color-orange-supernova);
     --color-error: var(--color-red-comet);
     --color-overlay: rgba(255, 255, 255, 0.7);
