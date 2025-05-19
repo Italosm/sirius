@@ -78,7 +78,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex items-center justify-center pt-14">
+    <div className="flex items-center justify-center pt-16">
       <div className="bg-overlay w-full max-w-md rounded-lg p-8 shadow-2xl backdrop-blur">
         <h2 className="mb-6 text-center text-2xl font-bold">Cadastre-se!</h2>
         <form
