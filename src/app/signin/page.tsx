@@ -3,19 +3,10 @@ import { Input } from '@/components/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsKey } from 'react-icons/bs';
-import { z } from 'zod';
 import { useForm } from 'react-hook-form';
+import { SignInSchema } from '@/types/auth';
+import { signInSchema } from '@/schemas/auth';
 
-const signInSchema = z.object({
-  email: z
-    .string({ required_error: 'O email é obrigatório' })
-    .email('Formato de email inválido')
-    .nonempty('O email é obrigatório'),
-  password: z
-    .string({ required_error: 'A senha é obrigatória' })
-    .nonempty('A senha é obrigatória'),
-});
-type SignInSchema = z.infer<typeof signInSchema>;
 export default function SignIn() {
   const {
     register,

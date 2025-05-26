@@ -3,48 +3,18 @@ import { Input } from '@/components/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsKey, BsPerson, BsCheck2Circle, BsXCircle } from 'react-icons/bs';
-import { z } from 'zod';
 import { useForm } from 'react-hook-form';
+import { SignUpSchema } from '@/types/auth';
+import { signUpSchema } from '@/schemas/auth';
 
-const signInSchema = z
-  .object({
-    name: z
-      .string({ required_error: 'O nome é obrigatório.' })
-      .min(6, 'Nome precisa estar completo.')
-      .refine(val => val.trim().includes(' '), {
-        message: 'Digite seu nome completo (nome e sobrenome).',
-      }),
-    email: z
-      .string({ required_error: 'O email é obrigatório.' })
-      .email('Formato de email inválido.')
-      .nonempty('O email é obrigatório.'),
-    password: z
-      .string({ required_error: 'A senha é obrigatória.' })
-      .min(8, 'A senha deve ter no mínimo 8 caracteres.')
-      .regex(/[A-Z]/, 'A senha deve conter pelo menos uma letra maiúscula.')
-      .regex(/[a-z]/, 'A senha deve conter pelo menos uma letra minúscula.')
-      .regex(/[0-9]/, 'A senha deve conter pelo menos um número.')
-      .regex(
-        /[^A-Za-z0-9]/,
-        'A senha deve conter pelo menos um caractere especial.'
-      ),
-    confirm_password: z.string({
-      required_error: 'A confirmação de senha é obrigatória.',
-    }),
-  })
-  .refine(({ password, confirm_password }) => password === confirm_password, {
-    message: 'As senhas precisam ser iguais.',
-    path: ['confirm_password'],
-  });
-type SignInSchema = z.infer<typeof signInSchema>;
 export default function SignUp() {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isValid },
-  } = useForm<SignInSchema>({
-    resolver: zodResolver(signInSchema),
+  } = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
     mode: 'onTouched',
   });
 
@@ -73,7 +43,7 @@ export default function SignUp() {
     },
   ];
 
-  function handleSignInSubmit(data: SignInSchema) {
+  function handleSignUpSubmit(data: SignUpSchema) {
     console.log(data);
   }
 
@@ -82,7 +52,7 @@ export default function SignUp() {
       <div className="bg-overlay w-full max-w-md rounded-lg p-8 shadow-2xl backdrop-blur">
         <h2 className="mb-6 text-center text-2xl font-bold">Cadastre-se!</h2>
         <form
-          onSubmit={handleSubmit(handleSignInSubmit)}
+          onSubmit={handleSubmit(handleSignUpSubmit)}
           className="flex flex-col gap-4"
         >
           <Input
