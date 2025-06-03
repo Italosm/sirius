@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const translateErrors = {
-    'Invalid credentials.': 'Email ou senha inválidos',
-  };
+  // const translateErrors = {
+  //   'Invalid credentials.': 'Email ou senha inválidos',
+  // };
   const body = await req.json();
 
   try {
@@ -18,11 +18,8 @@ export async function POST(req: NextRequest) {
     console.log('data:', data);
 
     if (!response.ok) {
-      const message = data.message as string;
-      const translatedError =
-        message in translateErrors ? translateErrors[message] : message;
       return NextResponse.json(
-        { error: translatedError },
+        { error: data.message },
         { status: response.status }
       );
     }
