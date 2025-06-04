@@ -44,17 +44,14 @@ interface SessionResponse {
 }
 interface ErrorResponse {
   status: number;
-  message: 'Invalid credentials.';
+  message: string;
 }
 
 export async function POST(req: NextRequest) {
-  const translateErrors = {
-    'Invalid credentials.': 'Email ou senha inválidos',
-  };
   const body = await req.json();
 
   try {
-    const response = await fetch(`${process.env.BACKEND_URL}/sessions`, {
+    const response = await fetch(`${process.env.BACKEND_URL}/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -66,7 +63,7 @@ export async function POST(req: NextRequest) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { error: translateErrors[(data as ErrorResponse).message] },
+        { error: data as ErrorResponse },
         { status: response.status }
       );
     }

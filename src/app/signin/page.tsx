@@ -8,6 +8,8 @@ import { SignInSchema } from '@/types/auth';
 import { signInSchema } from '@/schemas/auth';
 import { useState } from 'react';
 import { SpinLoader } from '@/components/SpinLoader';
+import { Button } from '@/components/Button';
+import { FiAlertCircle } from 'react-icons/fi';
 
 export default function SignIn() {
   const {
@@ -73,14 +75,16 @@ export default function SignIn() {
             icon={<BsKey />}
             {...register('password', { required: true })}
           />
-          {error && <p className="text-error text-sm">{error}</p>}
+          <Button className="h-10" type="submit">
+            {loading ? <SpinLoader /> : 'Entrar'}
+          </Button>
 
-          <button
-            type="submit"
-            className="bg-button-primary text-primary-contrast hover:bg-button-primary-hover mt-2 rounded py-2 font-semibold transition-all"
-          >
-            {!loading ? 'Entrar' : <SpinLoader />}
-          </button>
+          {error && (
+            <p className="text-error flex items-center gap-2 text-sm">
+              <FiAlertCircle className="text-error" />
+              {error}
+            </p>
+          )}
         </form>
       </div>
     </div>

@@ -1,12 +1,13 @@
 import {
   ForwardRefRenderFunction,
+  InputHTMLAttributes,
   ReactNode,
   forwardRef,
   useState,
 } from 'react';
 import { FiEye, FiEyeOff, FiAlertCircle } from 'react-icons/fi';
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   type: 'password' | 'text';
   error?: string;
