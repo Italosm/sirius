@@ -1,43 +1,6 @@
+import { User } from '@/models/user/user-model';
 import { NextRequest, NextResponse } from 'next/server';
-export interface User {
-  user_id: string;
-  name: string;
-  email: string;
-  isActive: boolean;
-  email_verified: boolean;
-  role: string[];
-  avatar: null;
-  clinic?: Clinic;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
-export interface Clinic {
-  clinic_id: string;
-  name: string;
-  doc: string;
-  email: string;
-  instagram: string;
-  slogan: string;
-  stripeSubscriptionStatus: string;
-  stripeCustomerId: null;
-  stripeSubscriptionId: null;
-  current_period_end: null;
-  school_clinic: boolean;
-  phone: string[];
-  whatsapp: string[];
-  address: string;
-  cep: string;
-  city: string;
-  state: string;
-  logo: string;
-  s3_logo: null;
-  complement: null;
-  neighborhood: string;
-  number: null;
-  createdAt: Date;
-  updatedAt: Date;
-}
 interface SessionResponse {
   token: string;
   user: User;

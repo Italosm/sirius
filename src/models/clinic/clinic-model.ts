@@ -1,0 +1,26 @@
+export type Clinic = {
+  clinic_id: string;
+  name: string;
+  doc: string;
+  email: string;
+  instagram: string;
+  slogan: string;
+  stripeSubscriptionStatus: string;
+  stripeCustomerId: null;
+  stripeSubscriptionId: null;
+  current_period_end: null;
+  school_clinic: boolean;
+  phone: string[];
+  whatsapp: string[];
+  address: string;
+  cep: string;
+  city: string;
+  state: string;
+  logo: string;
+  s3_logo: null;
+  complement: null;
+  neighborhood: string;
+  number: null;
+  createdAt: Date;
+  updatedAt: Date;
+};
